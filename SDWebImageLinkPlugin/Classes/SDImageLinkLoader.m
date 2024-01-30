@@ -179,7 +179,7 @@
     loaderContext.progressBlock = progressBlock;
     __block NSProgress *progress;
     progress = [imageProvider loadObjectOfClass:UIImage.class completionHandler:^(UIImage * _Nullable image, NSError * _Nullable error) {
-        if (progressBlock && progress) {
+        if (progressBlock && progress && [progress observationInfo]) {
             [progress removeObserver:self forKeyPath:NSStringFromSelector(@selector(fractionCompleted)) context:(__bridge void *)(loaderContext)];
         }
         if (operation.isCancelled) {
